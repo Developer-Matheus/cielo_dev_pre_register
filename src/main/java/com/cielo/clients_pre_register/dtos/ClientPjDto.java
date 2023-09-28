@@ -6,13 +6,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
 
 public record ClientPjDto(
 
       @NotBlank(message = "Field cnpj must not be blank.")
-      @Length(min = 14, max = 14, message = "CNPJ must have 14 characters.")
-      @CNPJ
+      @Length(min = 14, max = 18, message = "CPF must be between 14 and 18 characters.")
+      @CNPJ(message = "Field CNPJ must be a valid format.")
       String cnpj,
 
       @NotBlank(message = "Field corporate reason must not be blank.")
@@ -23,8 +22,7 @@ public record ClientPjDto(
       int mcc,
 
       @NotBlank(message = "Field CPF must not be blank.")
-      @CPF(message = "Field CPF must be a valid format.")
-      @Length(min = 11, max = 11, message = "CPF must have 11 characters.")
+      @Length(min = 11, max = 14, message = "CPF must be between 11 and 14 characters.")
       String contact_cpf,
 
       @NotBlank(message = "Field name must not be blank.")

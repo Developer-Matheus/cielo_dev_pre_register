@@ -1,30 +1,24 @@
 package com.cielo.clients_pre_register;
 
-import ch.qos.logback.core.net.server.Client;
 import com.cielo.clients_pre_register.models.ClientPfModel;
 import com.cielo.clients_pre_register.repositories.ClientPfRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 
 import java.util.Optional;
 import java.util.UUID;
 
-
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -98,7 +92,8 @@ public class ClientPfControllerTest {
 
         UUID clientId = createdCliente.getIdClient();
 
-        when(clientPfRepository.findById(createdCliente.getIdClient()));
+        when(clientPfRepository.findById(createdCliente.getIdClient()))
+                .thenReturn(Optional.ofNullable(createdCliente));
 
         createdCliente.setName("Matheus da Silva Jr");
         createdCliente.setMcc(1324);

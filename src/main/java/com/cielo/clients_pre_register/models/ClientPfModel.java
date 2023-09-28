@@ -1,9 +1,8 @@
 package com.cielo.clients_pre_register.models;
 
 
+import com.cielo.clients_pre_register.utils.Util;
 import jakarta.persistence.*;
-
-
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -72,10 +71,10 @@ public class ClientPfModel implements Serializable {
     }
 
     public String getCpf() {
-        return cpf;
+        return this.cpf;
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        this.cpf = Util.cpfFormat(cpf);
     }
 }

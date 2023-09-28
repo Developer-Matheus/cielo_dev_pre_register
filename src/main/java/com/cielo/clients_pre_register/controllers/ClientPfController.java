@@ -21,10 +21,18 @@ public class ClientPfController {
     ClientPfRepository clientPfRepository;
 
     @PostMapping("/clientes")
-    public ResponseEntity<ClientPfModel>saveClient(@RequestBody @Valid ClientPfDto clientPfDto){
+    public ResponseEntity<Object> saveClient(@RequestBody @Valid ClientPfDto clientPfDto){
+
         var clientModel = new ClientPfModel();
         BeanUtils.copyProperties(clientPfDto, clientModel);
+
+        Optional<ClientPfModel> existingClient = clientPfRepository.findByCpf(clientModel.getCpf());
+
+        if (existingClient.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Client is already registered.");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(clientPfRepository.save(clientModel));
+
     }
 
     @GetMapping("/clientes")
@@ -50,6 +58,7 @@ public class ClientPfController {
         }
         var clientModel  = clientPfO.get();
         BeanUtils.copyProperties(clientPfDto, clientModel);
+
         return ResponseEntity.status(HttpStatus.OK).body(clientPfRepository.save(clientModel));
     }
 

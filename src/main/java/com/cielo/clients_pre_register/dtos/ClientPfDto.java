@@ -1,6 +1,9 @@
 package com.cielo.clients_pre_register.dtos;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -16,7 +19,7 @@ public record ClientPfDto(
       int mcc,
       @NotBlank(message = "Field CPF must not be blank.")
       @CPF(message = "Field CPF must be a valid format.")
-      @Length(min = 11, max = 11, message = "CPF must have 11 characters.")
+      @Length(min = 11, max = 14, message = "CPF must be between 11 and 14 characters.")
       String cpf
 ) {
 

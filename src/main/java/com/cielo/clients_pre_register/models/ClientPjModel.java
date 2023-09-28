@@ -1,5 +1,6 @@
 package com.cielo.clients_pre_register.models;
 
+import com.cielo.clients_pre_register.utils.Util;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.*;
@@ -65,7 +66,7 @@ public class ClientPjModel implements Serializable {
     }
 
     public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+        this.cnpj = Util.cnpjFormat(cnpj);
     }
 
     public String getCorporate_reason() {
@@ -89,7 +90,7 @@ public class ClientPjModel implements Serializable {
     }
 
     public void setContact_cpf(String contact_cpf) {
-        this.contact_cpf = contact_cpf;
+        this.contact_cpf = Util.cpfFormat(contact_cpf);
     }
 
     public String getContact_name() {

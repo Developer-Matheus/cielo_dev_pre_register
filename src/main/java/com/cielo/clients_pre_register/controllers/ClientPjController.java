@@ -22,9 +22,16 @@ public class ClientPjController {
     ClientPjRepository clientPjRepository;
 
     @PostMapping("/clientes/pj")
-    public ResponseEntity<ClientPjModel>saveClient(@RequestBody @Valid ClientPjDto clientPjDto){
+    public ResponseEntity<Object>saveClient(@RequestBody @Valid ClientPjDto clientPjDto){
         var clientModel = new ClientPjModel();
         BeanUtils.copyProperties(clientPjDto, clientModel);
+
+        Optional<ClientPjModel> existingClient = clientPjRepository.findByCnpj(clientModel.getCnpj());
+
+        if (existingClient.isPresent()){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Client is already registered.");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(clientPjRepository.save(clientModel));
     }
 
@@ -52,6 +59,7 @@ public class ClientPjController {
         }
         var clientModel  = clientPjO.get();
         BeanUtils.copyProperties(clientPjDto, clientModel);
+
         return ResponseEntity.status(HttpStatus.OK).body(clientPjRepository.save(clientModel));
     }
 

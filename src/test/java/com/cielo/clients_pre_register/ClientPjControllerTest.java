@@ -96,7 +96,8 @@ public class ClientPjControllerTest {
 
         UUID clientId = createdCliente.getIdClient();
 
-        when(clientPjRepository.findById(createdCliente.getIdClient()));
+        when(clientPjRepository.findById(createdCliente.getIdClient()))
+                .thenReturn(Optional.ofNullable(createdCliente));
 
         createdCliente.setContact_name("Matheus da Silva Jr");
         createdCliente.setMcc(1324);

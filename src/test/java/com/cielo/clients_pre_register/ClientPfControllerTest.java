@@ -72,6 +72,13 @@ public class ClientPfControllerTest {
 
     @Test
     public void clientPfTestSave() throws Exception {
+        client = new ClientPfModel(
+                UUID.randomUUID(),
+                "Matheus de Oliveira",
+                "matheusdeoliveiracastanho@gmail.com",
+                1344,
+                "45312728039");
+
         mockMvc.perform(post("/clientes")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(client)))

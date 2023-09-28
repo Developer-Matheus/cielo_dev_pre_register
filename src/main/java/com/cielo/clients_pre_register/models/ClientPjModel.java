@@ -30,6 +30,16 @@ public class ClientPjModel implements Serializable {
     private String contact_email;
 
 
+    public ClientPjModel(UUID idClient, String cnpj, String corporate_reason, int mcc, String contact_cpf, String contact_name, String contact_email) {
+        this.idClient = idClient;
+        this.cnpj = cnpj;
+        this.corporate_reason = corporate_reason;
+        this.mcc = mcc;
+        this.contact_cpf = contact_cpf;
+        this.contact_name = contact_name;
+        this.contact_email = contact_email;
+    }
+
     public ClientPjModel(String cnpj, String corporate_reason, int mcc, String contact_cpf, String contact_name, String contact_email) {
         this.cnpj = cnpj;
         this.corporate_reason = corporate_reason;
@@ -40,6 +50,14 @@ public class ClientPjModel implements Serializable {
     }
 
     public ClientPjModel() {
+    }
+
+    public UUID getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(UUID idClient) {
+        this.idClient = idClient;
     }
 
     public String getCnpj() {

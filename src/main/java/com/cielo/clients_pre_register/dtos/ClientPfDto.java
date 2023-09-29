@@ -1,9 +1,6 @@
 package com.cielo.clients_pre_register.dtos;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -16,6 +13,7 @@ public record ClientPfDto(
       @Pattern(regexp = "([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$",message = "Email bust be a valid format.")
       String email,
       @NotNull(message = "Field MCC must not be null.")
+      @Min(value=1,message = "Field MCC must be greater than 0.")
       int mcc,
       @NotBlank(message = "Field CPF must not be blank.")
       @CPF(message = "Field CPF must be a valid format.")
